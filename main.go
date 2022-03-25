@@ -36,7 +36,6 @@ func main() {
 		}
 		return c.JSON(token)
 	})
-	
   app.Listen(":8080")
 }
 
