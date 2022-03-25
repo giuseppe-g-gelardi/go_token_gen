@@ -19,10 +19,7 @@ func main() {
 	// * init fiber app
 	app := fiber.New()
 
-	// * load .env file
-	err := godotenv.Load(".env")
-	if err != nil {fmt.Println("Error loading .env")}
-	fmt.Println(".env successfully loaded")
+	loadDotEnv()
 	
 	// * endpoint to generate JWT
 	app.Post("/token", func(c *fiber.Ctx) error {
@@ -41,6 +38,16 @@ func main() {
 	})
 	
   app.Listen(":8080")
+}
+
+func loadDotEnv() {
+	// * load .env file
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Println("Error loading .env")
+	} else {
+		fmt.Println(".env successfully loaded")
+	}
 }
 
 func generateToken(user User) (string, error) {
